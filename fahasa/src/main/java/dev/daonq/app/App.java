@@ -224,6 +224,7 @@ public class App {
         }
         System.out.printf("\n  |                                                                                TỔNG CỘNG : %-20s |", formatter.format(order.getTotalDue()));
         System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
+        sc.nextLine();
     }
 
     private static void DonHangCuaToi() throws SQLException {
