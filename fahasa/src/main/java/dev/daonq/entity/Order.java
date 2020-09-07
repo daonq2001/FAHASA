@@ -3,41 +3,40 @@ package dev.daonq.entity;
 import java.sql.Timestamp;
 
 public class Order {
-    private int ID;
-    private int CustomerID;
-    private Timestamp Date;
-    private Double TotalDue;
+    private int id;
+    private int customerId;
+    private Timestamp date;
+    private int status;
 
-    public int getID() {
-        return this.ID;
+    public int getStatus(){
+        return status;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setStatus(int status){
+        this.status = status;
+    }
+
+    public int getID() {
+        return this.id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     public int getCustomerID() {
-        return this.CustomerID;
+        return this.customerId;
     }
 
-    public void setCustomerID(int CustomerID) {
-        this.CustomerID = CustomerID;
+    public void setCustomerID(int customerId) {
+        this.customerId = customerId;
     }
 
     public Timestamp getDate() {
-        return this.Date;
+        return this.date;
     }
 
-    public void setDate(Timestamp Date) {
-        this.Date = Date;
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
-
-    public Double getTotalDue() {
-        return this.TotalDue;
-    }
-
-    public void setTotalDue(Double TotalDue) {
-        this.TotalDue = TotalDue;
-    }
-
 }

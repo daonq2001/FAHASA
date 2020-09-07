@@ -1,32 +1,41 @@
 package dev.daonq.entity;
 
 public class OrderDetail {
-    private int BookID;
-    private int OrderID;
-    private int Amount;
+    private int bookID;
+    private int orderID;
+    private int amount;
+    private Double unitPrice;
 
-    public int getBookID() {
-        return this.BookID;
+    public Double getUnitPrice(){
+        return this.unitPrice;
     }
 
-    public void setBookID(int BookID) {
-        this.BookID = BookID;
+    public void setUnitPrice(Double unitPrice){
+        this.unitPrice = unitPrice;
+    }
+
+    public int getBookID() {
+        return this.bookID;
+    }
+
+    public void setBookID(int bookID) {
+        this.bookID = bookID;
     }
 
     public int getOrderID() {
-        return this.OrderID;
+        return this.orderID;
     }
 
-    public void setOrderID(int OrderID) {
-        this.OrderID = OrderID;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public int getAmount() {
-        return this.Amount;
+        return this.amount;
     }
 
-    public void setAmount(int Amount) {
-        this.Amount = Amount;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
 }

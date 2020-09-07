@@ -1,6 +1,5 @@
-drop database Akali;
-create database if not exists Akali;
-use Akali;
+create database if not exists BooksStoreOnline;
+use BooksStoreOnline;
 
 create table if not exists Books(
 	ID int primary key,
@@ -28,12 +27,13 @@ create table if not exists Orders(
 	ID int auto_increment primary key,
     CustomerID int,
     Date datetime default current_timestamp,
-    TotalDue decimal(10, 03));
+    Status int default 1);
 
 create table if not exists OrderDetails(
 	BookID int,
     OrderID int,
     Amount int,
+    UnitPrice decimal(10,03),
     primary key(BookID, OrderID));
 
 alter table Orders add constraint FK_Orders_Customers foreign key(CustomerID) references Customers(ID);

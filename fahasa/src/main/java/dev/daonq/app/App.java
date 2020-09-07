@@ -33,7 +33,7 @@ public class App {
         do {
             cls();
             System.out.printf("\n  -------------------------------------------");
-            System.out.printf("\n   CHÀO MỪNG BẠN ĐẾN VỚI CỬA HÀNG SÁCH AKALI");
+            System.out.printf("\n   CHÀO MỪNG BẠN ĐẾN VỚI CỬA HÀNG SÁCH ONLINE");
             System.out.printf("\n  -------------------------------------------");
             System.out.printf("\n   1. XEM DANH SÁCH SẢN PHẨM");
             System.out.printf("\n   2. TÌM KIẾM SẢN PHẨM");
@@ -45,7 +45,7 @@ public class App {
             luachon = sc.nextLine();
             switch (luachon) {
                 case "1":
-                    ShowBooks(books);
+                    ShowBooks(books, false);
                     break;
                 case "2":
                     String luachon2;
@@ -66,17 +66,13 @@ public class App {
                                 System.out.printf("\n  Nhập tiêu đề của cuốn sách mà bạn muốn tìm: ");
                                 String tenSach = sc.nextLine();
                                 searching = TimKiemSachTheoTenSach(tenSach);
-                                System.out.printf("\n  Đã tìm thấy %d kết quả với từ khóa \"%s\".", searching.size(), tenSach);
-                                sc.nextLine();
-                                ShowBooks(searching);
+                                ShowBooks(searching, true);
                                 break;
                             case "2":
                                 System.out.printf("\n  Nhập tên Tác giả của cuốn sách mà bạn muốn tìm: ");
                                 String tacgia = sc.nextLine();
                                 searching = TimKiemTheoTenTacGia(tacgia);
-                                System.out.printf("\n  Đã tìm thấy %d kết quả với từ khóa \"%s\".", searching.size(), tacgia);
-                                sc.nextLine();
-                                ShowBooks(searching);
+                                ShowBooks(searching, true);
                                 break;
                             case "0":
 
@@ -101,14 +97,16 @@ public class App {
                                     int check = 0, ID = 0, a = 0;
                                     do {
                                         try {
-                                            System.out.printf("\n  Nhập ID sách có trong giỏ hàng mà bạn muốn chỉnh sửa: ");
+                                            System.out.printf(
+                                                    "\n  Nhập ID sách có trong giỏ hàng mà bạn muốn chỉnh sửa: ");
                                             ID = Integer.parseInt(sc.nextLine());
                                         } catch (Exception e) {
-                                            System.out.printf("\n  Kí tự bạn vừa nhập vào KHÔNG đúng với định dạng ID. Vui lòng nhập lại.");
+                                            System.out.printf(
+                                                    "\n  Kí tự bạn vừa nhập vào KHÔNG đúng với định dạng ID. Vui lòng nhập lại.");
                                         }
-                                        
+
                                     } while (check != 0);
-                                    
+
                                     if (checkID(ID)) {
                                         for (int i = 0; i < listOrderDetails.size(); i++) {
                                             if (ID == listOrderDetails.get(i).getBookID()) {
@@ -119,10 +117,11 @@ public class App {
                                                         System.out.printf("\n  Nhập số lượng mới: ");
                                                         soluongmoi = Integer.parseInt(sc.nextLine());
                                                     } catch (Exception e) {
-                                                        System.out.printf("\n  Kí tự bạn vừa nhập vào KHÔNG đúng với định dạng. Vui lòng nhập lại.");
+                                                        System.out.printf(
+                                                                "\n  Kí tự bạn vừa nhập vào KHÔNG đúng với định dạng. Vui lòng nhập lại.");
                                                     }
                                                 } while (check5 != 0);
-                                                
+
                                                 if (soluongmoi == 0) {
                                                     listOrderDetails.remove(i);
                                                     luachon3 = "0";
@@ -130,14 +129,15 @@ public class App {
                                                     listOrderDetails.get(i).setAmount(soluongmoi);
                                                     luachon3 = "0";
                                                 } else if (soluongmoi < 0) {
-                                                    System.out.printf("\n  Chỉnh sửa số lượng thất bại vì số lượng phải lớn hơn hoặc bằng 0.");
+                                                    System.out.printf(
+                                                            "\n  Chỉnh sửa số lượng thất bại vì số lượng phải lớn hơn hoặc bằng 0.");
                                                     sc.nextLine();
                                                 }
                                                 break;
                                             }
                                         }
                                     }
-                                    if(a == 0) {
+                                    if (a == 0) {
                                         System.out.printf("\n  ID bạn vừa nhập không xuất hiện trong giỏ hàng.");
                                         sc.nextLine();
                                     }
@@ -156,7 +156,8 @@ public class App {
                             }
                         } while (!luachon3.equals("0"));
                     } else {
-                        System.out.printf("\n  Giỏ hàng của bạn hiện tại đang trống. Bạn cần thêm sản phẩm vào giỏ hàng ngay!");
+                        System.out.printf(
+                                "\n  Giỏ hàng của bạn hiện tại đang trống. Bạn cần thêm sản phẩm vào giỏ hàng ngay!");
                         sc.nextLine();
                     }
                     break;
@@ -198,48 +199,69 @@ public class App {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         System.out.printf("\n  HÓA ĐƠN BÁN HÀNG");
         System.out.printf("\n  Ngày: %s", order.getDate());
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI AKALI                                                            |");
-        System.out.printf("\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
-        System.out.printf("\n  | Địa chỉ          : 18 Tam Trinh, Hai Bà Trưng, Hà Nội                                                           |");
-        System.out.printf("\n  | Điện thoại       : (+84) 987 654 321                                                                            |");
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI YOUTUBER                                                            |");
+        System.out.printf(
+                "\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
+        System.out.printf(
+                "\n  | Địa chỉ          : Tầng 99, 18 Tam Trinh, Hai Bà Trưng, Hà Nội                                                           |");
+        System.out.printf(
+                "\n  | Điện thoại       : (+84) 987 654 321                                                                            |");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
         System.out.printf("\n  | Họ tên khách hàng: %-92s |", customer.getName().toUpperCase());
         System.out.printf("\n  | Mã số thuế       : %-92s |", "- - - - - - - - - -");
         System.out.printf("\n  | Địa chỉ          : %-92s |", customer.getAddress());
         System.out.printf("\n  | Điện thoại       : %-92s |", customer.getPhone());
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  +------+-----------------------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "STT", "Sản phẩm", "Giá", "Số lượng", "Thành tiền");
-        System.out.printf("\n  +------+-----------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------+-----------------------------------------------------------------------------------------------------------+");
+        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "STT", "Sản phẩm", "Giá", "Số lượng",
+                "Thành tiền");
+        System.out.printf(
+                "\n  +------+-----------------------------------------------------------------------------------------------------------+");
         Book l = new Book();
         BookBl bookBL = new BookBl();
+        Double totalDue = 0.0;
         for (int i = 0; i < orderDetails.size(); i++) {
             l = bookBL.getBookByID(orderDetails.get(i).getBookID());
-            System.out.printf("\n  | %-4d | %-60s | %-10.3f | %-10d | %-15s |", (i + 1), l.getTitle(), l.getPrice(),
-                    orderDetails.get(i).getAmount(),
-                    formatter.format(l.getPrice() * orderDetails.get(i).getAmount()));
-            System.out.printf("\n  |-----------------------------------------------------------------------------------------------------------------|");
+            totalDue += orderDetails.get(i).getUnitPrice() * orderDetails.get(i).getAmount();
+            System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d | %-15s |", (i + 1), l.getTitle(),
+                    orderDetails.get(i).getUnitPrice(), orderDetails.get(i).getAmount(),
+                    formatter.format(orderDetails.get(i).getUnitPrice() * orderDetails.get(i).getAmount()));
+            System.out.printf(
+                    "\n  |-----------------------------------------------------------------------------------------------------------------|");
         }
-        System.out.printf("\n  |                                                                                TỔNG CỘNG : %-20s |", formatter.format(order.getTotalDue()));
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  |                                                                                TỔNG CỘNG : %-20s |",
+                formatter.format(totalDue));
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
         sc.nextLine();
     }
 
     private static void DonHangCuaToi() throws SQLException {
         cls();
         OrderDetailBl orderDetailBL = new OrderDetailBl();
-        BookBl bookBL = new BookBl();
         ArrayList<Order> listOrders = new OrderBl().getListOrderByCustomerID(customer.getID());
+        BookBl bookBL = new BookBl();
         if (listOrders.size() > 0) {
             DecimalFormat formater = new DecimalFormat("###,###,###");
-            ArrayList<OrderDetail> orderDetails = null;
+            ArrayList<OrderDetail> orderDetails = new ArrayList<>();
             System.out.printf("\n  ĐƠN HÀNG CỦA BẠN");
-            System.out.printf("\n  +----------------------------------------------------------------------------------------------------------------------------------------+");
-            System.out.printf("\n  | %-5s | %-21s | %-84s | %-15s |", "ID", "Ngày đặt hàng", "Sản phẩm", "Tổng tiền");
-            System.out.printf("\n  +----------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf(
+                    "\n  +-------------------------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("\n  | %-5s | %-21s | %-84s | %-15s | %-20s |", "ID", "Ngày đặt hàng", "Sản phẩm",
+                    "Tổng tiền", "Trạng thái");
+            System.out.printf(
+                    "\n  +-------------------------------------------------------------------------------------------------------------------------------------------------------+");
             for (int i = 0; i < listOrders.size(); i++) {
+                orderDetails.clear();
                 orderDetails = orderDetailBL.getListOrderDetailByOrderID(listOrders.get(i).getID());
                 String sanpham = "";
                 if (orderDetails.size() > 1) {
@@ -253,16 +275,23 @@ public class App {
                         sanpham = book.getTitle();
                     }
                 }
-                System.out.printf("\n  | %-5d | %-21s | %-84s | %-15s |", listOrders.get(i).getID(),
-                        listOrders.get(i).getDate(), sanpham, formater.format(listOrders.get(i).getTotalDue()));
+                Double totalDue = 0.0;
+                for (int j = 0; j < orderDetails.size(); j++) {
+                    totalDue = orderDetails.get(j).getUnitPrice() * orderDetails.get(j).getAmount();
+                }
+                String status = (listOrders.get(i).getStatus() == 1) ? "Đang xử lý" : "Thanh toán thành công";
+                System.out.printf("\n  | %-5d | %-21s | %-84s | %-15s | %-20s |", listOrders.get(i).getID(),
+                        listOrders.get(i).getDate(), sanpham, formater.format(totalDue), status);
             }
-            System.out.printf("\n  +----------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf(
+                    "\n  +-------------------------------------------------------------------------------------------------------------------------------------------------------+");
 
             byte check = 0;
             System.out.printf("\n  Nhập ID hóa đơn mà bạn muốn xem chi tiết: ");
             int ID = Integer.parseInt(sc.nextLine());
             for (int i = 0; i < listOrders.size(); i++) {
                 if (ID == listOrders.get(i).getID()) {
+                    orderDetails.clear();
                     orderDetails = orderDetailBL.getListOrderDetailByOrderID(ID);
                     InDonHang(orderDetails, listOrders.get(i));
                     check = 1;
@@ -280,98 +309,93 @@ public class App {
 
     private static void DatHang() throws SQLException {
         if (Login) {
-            XuLyHoaDon();
+            InHoaDon();
         } else {
-            if (DangNhap()) {
-                Login = true;
-                XuLyHoaDon();
-            } else {
-                System.out.printf("\n  Vui lòng kiểm tra lại Email hoặc mật khẩu.");
-                sc.nextLine();
-            }
+            String yn = "N";
+            do {
+                if (DangNhap()) {
+                    Login = true;
+                    InHoaDon();
+                } else {
+                    System.out.printf("\n  Vui lòng kiểm tra lại email hoặc mật khẩu.");
+                    System.out.printf("\n  Bạn có muốn đăng nhập lại không? (Y/N): ");
+                    yn = sc.nextLine();
+                }
+            } while (!yn.equals("N"));
         }
     }
 
-    private static void XuLyHoaDon() throws SQLException {
-        
-        int check = 0;
-        Double tien1 = 0.0, tien2 = 0.0;
-        do {
-            try {
-                System.out.printf("\n  Bạn trả bao nhiêu tiền: ");
-                tien1 = Double.parseDouble(sc.nextLine());
-            } catch (Exception e) {
-                System.out.printf("\n  Kí tự bạn vừa nhập KHÔNG đúng với định dạng. Vui lòng nhập lại.");
-            }
-        } while (check != 0);
-        
-        for (int i = 0; i < listOrderDetails.size(); i++) {
-            tien2 += listOrderDetails.get(i).getAmount() * new BookBl().getPriceByID(listOrderDetails.get(i).getBookID());
-        }
-        if (tien1 >= tien2) {
-            OrderBl orderBL = new OrderBl();
-            orderBL.insertOrder(customer.getID(), tien2);
-            OrderDetailBl orderDetailBL = new OrderDetailBl();
-            Order order = orderBL.getOrderByCustomerID(customer.getID());
-            for (int i = 0; i < listOrderDetails.size(); i++) {
-                listOrderDetails.get(i).setOrderID(order.getID());
-                orderDetailBL.insertOrderDetail(listOrderDetails.get(i));
-            }
-            InHoaDon(tien1, order);
-            listOrderDetails.clear();
-        } else {
-            System.out.printf("\n  Số tiền hiện tại của bạn không đủ để thanh toán hóa đơn này.\n  Bạn cần ít nhất %s VNĐ để thanh toán.", new DecimalFormat("###,###,###").format(tien2));
-            sc.nextLine();
-        }
-    }
-
-    private static void InHoaDon(Double tien, Order order) throws SQLException {
+    private static void InHoaDon() throws SQLException {
         cls();
+        OrderBl orderBL = new OrderBl();
+        orderBL.insertOrder(customer.getID());
+        OrderDetailBl orderDetailBL = new OrderDetailBl();
+        Order order = orderBL.getOrderByCustomerID(customer.getID());
+        for (int i = 0; i < listOrderDetails.size(); i++) {
+            listOrderDetails.get(i).setOrderID(order.getID());
+            listOrderDetails.get(i).setUnitPrice(new BookBl().getBookByID(listOrderDetails.get(i).getBookID()).getPrice());
+            orderDetailBL.insertOrderDetail(listOrderDetails.get(i));
+        }
+
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         System.out.printf("\n  HÓA ĐƠN BÁN HÀNG");
         System.out.printf("\n  Ngày: %s", order.getDate());
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI AKALI                                                            |");
-        System.out.printf("\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
-        System.out.printf("\n  | Địa chỉ          : 18 Tam Trinh, Hai Bà Trưng, Hà Nội                                                           |");
-        System.out.printf("\n  | Điện thoại       : (+84) 987 654 321                                                                            |");
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI YOUTUBER                                                            |");
+        System.out.printf(
+                "\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
+        System.out.printf(
+                "\n  | Địa chỉ          : 18 Tam Trinh, Hai Bà Trưng, Hà Nội                                                           |");
+        System.out.printf(
+                "\n  | Điện thoại       : (+84) 987 654 321                                                                            |");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
         System.out.printf("\n  | Họ tên khách hàng: %-92s |", customer.getName().toUpperCase());
         System.out.printf("\n  | Mã số thuế       : %-92s |", "- - - - - - - - - -");
         System.out.printf("\n  | Địa chỉ          : %-92s |", customer.getAddress());
         System.out.printf("\n  | Điện thoại       : %-92s |", customer.getPhone());
-        System.out.printf("\n  +------------------+----------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "STT", "Sản phẩm", "Giá", "Số lượng", "Thành tiền");
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "STT", "Sản phẩm", "Giá", "Số lượng",
+                "Thành tiền");
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
         Book l = new Book();
         BookBl bookBL = new BookBl();
+        Double totalDue = 0.0;
         for (int i = 0; i < listOrderDetails.size(); i++) {
             l = bookBL.getBookByID(listOrderDetails.get(i).getBookID());
-        System.out.printf("\n  | %-4d | %-60s | %-10.3f | %-10d | %-15s |", (i + 1), l.getTitle(), l.getPrice(),
-                    listOrderDetails.get(i).getAmount(),
-                    formatter.format(l.getPrice() * listOrderDetails.get(i).getAmount()));
-        System.out.printf("\n  |-----------------------------------------------------------------------------------------------------------------|");
+            totalDue += (listOrderDetails.get(i).getUnitPrice() * listOrderDetails.get(i).getAmount());
+            System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d | %-15s |", (i + 1), l.getTitle(),
+                    listOrderDetails.get(i).getUnitPrice(), listOrderDetails.get(i).getAmount(),
+                    formatter.format(listOrderDetails.get(i).getUnitPrice() * listOrderDetails.get(i).getAmount()));
+            System.out.printf(
+                    "\n  |-----------------------------------------------------------------------------------------------------------------|");
         }
-        Double tralai = order.getTotalDue() - tien; tralai = Math.abs(tralai);
-        System.out.printf("\n  |                                                                                TỔNG CỘNG : %-20s |", formatter.format(order.getTotalDue()));
-        System.out.printf("\n  |                                                                                KHÁCH TRẢ : %-20s |", formatter.format(tien));
-        System.out.printf("\n  |                                                                                  TRẢ LẠI : %-20s |", formatter.format(tralai));
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  |                                                                                TỔNG CỘNG : %-20s |",
+                formatter.format(totalDue));
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
+        listOrderDetails.clear();
         sc.nextLine();
     }
 
     private static Boolean DangNhap() {
-        System.out.printf("\n  Bạn cần Đăng Nhập để thực hiện chức năng này");
-        System.out.printf("\n  => Email của bạn: ");
+        System.out.printf("\n  Email của bạn: ");
         String Email = sc.nextLine();
         java.io.Console console = System.console();
-        char[] passwordArray = console.readPassword("  => Nhập mật khẩu: ");
+        char[] passwordArray = console.readPassword("  Nhập mật khẩu: ");
         String Password = new String(passwordArray);
         Password = MD5(Password);
         Customer c = new CustomerBl().getPassword(Email);
-        if(c != null){
+        if (c != null) {
             if (c.getPassword().equals(Password)) {
                 customer = c;
                 return true;
@@ -383,23 +407,32 @@ public class App {
     private static void XemChiTietGioHang() throws SQLException {
         DecimalFormat formater = new DecimalFormat("###,###,###");
         System.out.printf("\n  GIỎ HÀNG CỦA TÔI");
-        System.out.printf("\n  +------+--------------------------------------------------------------+------------+------------+-----------------+");
-        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "ID", "Tên sách", "Giá", "Số lượng", "Thành tiền");
-        System.out.printf("\n  +------+--------------------------------------------------------------+------------+------------+-----------------+");
+        System.out.printf(
+                "\n  +------+--------------------------------------------------------------+------------+------------+-----------------+");
+        System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "ID", "Tên sách", "Giá", "Số lượng",
+                "Thành tiền");
+        System.out.printf(
+                "\n  +------+--------------------------------------------------------------+------------+------------+-----------------+");
         Book book = null;
         Double thanhtien = 0.0;
         for (int i = 0; i < listOrderDetails.size(); i++) {
             book = new BookBl().getBookByID(listOrderDetails.get(i).getBookID());
             Double tamtinh = book.getPrice() * listOrderDetails.get(i).getAmount();
-        if(i != 0){
-        System.out.printf("\n  ------------------------------------------------------------------------------------------------------------------");
+            if (i != 0) {
+                System.out.printf(
+                        "\n  ------------------------------------------------------------------------------------------------------------------");
+            }
+            System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d | %-15s |", book.getID(), book.getTitle(),
+                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+            thanhtien += book.getPrice() * listOrderDetails.get(i).getAmount();
         }
-        System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d | %-15s |", book.getID(), book.getTitle(), formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
-                                                                            thanhtien += book.getPrice() * listOrderDetails.get(i).getAmount();
-        }
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("\n  |                                                                                 TỔNG CỘNG: %-20s |", formater.format(thanhtien));
-        System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
+        System.out.printf(
+                "\n  |                                                                                 TỔNG CỘNG: %-20s |",
+                formater.format(thanhtien));
+        System.out.printf(
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
         System.out.printf("\n  U: Chỉnh sửa giỏ hàng.   D: Đặt hàng.   0: Trở về. => ");
     }
 
@@ -455,7 +488,6 @@ public class App {
 
     private static void ThemSanPhamVaoGioHang(int BookID) throws SQLException {
         int soluong = 0, check = 0, a = 0;
-
         do {
             try {
                 System.out.printf("\n  Bạn muốn mua bao nhiêu quyển: ");
@@ -466,7 +498,7 @@ public class App {
                 check = 1;
             }
         } while (check != 0);
-        
+
         for (int i = 0; i < listOrderDetails.size(); i++) {
             if (listOrderDetails.get(i).getBookID() == BookID) {
                 listOrderDetails.get(i).setAmount(soluong + listOrderDetails.get(i).getAmount());
@@ -492,9 +524,11 @@ public class App {
         cls();
         DecimalFormat formater = new DecimalFormat("###,###,###");
         Book book = new BookBl().getBookByID(BookID);
-        System.out.printf("\n  ---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf(
+                "\n  ---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("\n  THÔNG TIN CHI TIẾT");
-        System.out.printf("\n  ---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf(
+                "\n  ---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("\n  Tiêu đề           :  %s", book.getTitle());
         System.out.printf("\n  Tác giả           :  %s", book.getAuthor());
         System.out.printf("\n  Giá bán (VNĐ)     :  %s", formater.format(book.getPrice()));
@@ -505,11 +539,15 @@ public class App {
         System.out.printf("\n  Số trang          :  %s", book.getNumberofPages());
         System.out.printf("\n  SKU               :  %s", book.getSKU());
         System.out.printf("\n  Nhà xuất bản      :  %s", book.getPublishingCompany());
-        System.out.printf("\n  ---------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("\n  MÔ TẢ SẢN PHẨM"); String Description = book.getDescription().replaceAll("  ", " ").replaceAll("\n ", "\n");
-        System.out.printf("\n  ---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf(
+                "\n  ---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("\n  MÔ TẢ SẢN PHẨM");
+        String Description = book.getDescription().replaceAll("  ", " ").replaceAll("\n ", "\n");
+        System.out.printf(
+                "\n  ---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("\n  %s", Description);
-        System.out.printf("\n  ---------------------------------------------------------------------------------------------------------------------");
+        System.out.printf(
+                "\n  ---------------------------------------------------------------------------------------------------------------------");
         sc.nextLine();
     }
 
@@ -518,8 +556,8 @@ public class App {
         return listID.contains(ID);
     }
 
-    private static void ShowBooks(ArrayList<Book> books) throws SQLException {
-        
+    private static void ShowBooks(ArrayList<Book> books, Boolean searching) throws SQLException {
+
         int from, to, size = books.size();
 
         DecimalFormat formater = new DecimalFormat("###,###,###");
@@ -528,13 +566,21 @@ public class App {
             String luachon1;
             do {
                 cls();
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ");
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                for (int i = 0; i < size; i++) {
-                    System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(), books.get(i).getTitle(), books.get(i).getAuthor(), formater.format(books.get(i).getPrice()));
+                if (searching) {
+                    System.out.printf("\n  Đã tìm thấy %d kết quả trong vòng 0.05s.", books.size());
                 }
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                for (int i = 0; i < size; i++) {
+                    System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(),
+                            books.get(i).getTitle(), books.get(i).getAuthor(),
+                            formater.format(books.get(i).getPrice()));
+                }
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 System.out.printf("\n  Bạn chọn => A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
                 luachon1 = sc.nextLine();
                 switch (luachon1) {
@@ -570,7 +616,7 @@ public class App {
                                 check2 = 1;
                             }
                         } while (check2 != 0);
-                        
+
                         if (checkID(BookID2)) {
                             XemChiTietSanPham(BookID2);
                         } else {
@@ -594,14 +640,28 @@ public class App {
             String luachon1;
             do {
                 cls();
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ");
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                for (int i = from; i < to; i++) {
-                    System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(), books.get(i).getTitle(), books.get(i).getAuthor(), formater.format(books.get(i).getPrice()));
+                if (searching) {
+                    System.out.printf("\n  Đã tìm thấy %d kết quả trong vòng 0.05s.", books.size());
                 }
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  Bạn chọn =>  1..2: Chuyển trang  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                for (int i = from; i < to; i++) {
+                    System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(),
+                            books.get(i).getTitle(), books.get(i).getAuthor(),
+                            formater.format(books.get(i).getPrice()));
+                }
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (from == 0) {
+                    System.out.printf("\n  [1] - 2");
+                } else if (from == 20) {
+                    System.out.printf("\n  1 - [2]");
+                }
+                System.out.printf(
+                        "\n  Bạn chọn =>  1..2: Chuyển trang  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
                 luachon1 = sc.nextLine();
                 switch (luachon1) {
                     case "A":
@@ -669,15 +729,30 @@ public class App {
             to = 20;
             do {
                 cls();
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (searching) {
+                    System.out.printf("\n  Đã tìm thấy %d kết quả trong vòng 0.05s.", books.size());
+                }
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ (VNĐ)");
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 for (int i = from; i < to; i++) {
                     System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(),
-                            books.get(i).getTitle(), books.get(i).getAuthor(), formater.format(books.get(i).getPrice()));
+                            books.get(i).getTitle(), books.get(i).getAuthor(),
+                            formater.format(books.get(i).getPrice()));
                 }
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  Bạn chọn => 1..3: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (from == 0) {
+                    System.out.printf("\n  [1] - 2 - 3");
+                } else if (from == 20) {
+                    System.out.printf("\n  1 - [2] - 3");
+                } else if (from == 40) {
+                    System.out.printf("\n  1 - 2 - [3]");
+                }
+                System.out.printf(
+                        "\n  Bạn chọn => 1..3: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
                 luachon1 = sc.nextLine();
                 switch (luachon1) {
                     case "A":
@@ -749,15 +824,32 @@ public class App {
             String luachon1;
             do {
                 cls();
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (searching) {
+                    System.out.printf("\n  Đã tìm thấy %d kết quả trong vòng 0.05s.", books.size());
+                }
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ (VNĐ)");
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 for (int i = from; i < to; i++) {
                     System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(),
-                            books.get(i).getTitle(), books.get(i).getAuthor(), formater.format(books.get(i).getPrice()));
+                            books.get(i).getTitle(), books.get(i).getAuthor(),
+                            formater.format(books.get(i).getPrice()));
                 }
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  Bạn chọn => 1..4: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (from == 0) {
+                    System.out.printf("\n  [1] - 2 - 3 - 4");
+                } else if (from == 20) {
+                    System.out.printf("\n  1 - [2] - 3 - 4");
+                } else if (from == 40) {
+                    System.out.printf("\n  1 - 2 - [3] - 4");
+                } else if (from == 60) {
+                    System.out.printf("\n  1 - 2 - 3 - [4]");
+                }
+                System.out.printf(
+                        "\n  Bạn chọn => 1..4: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
                 luachon1 = sc.nextLine();
                 switch (luachon1) {
                     case "A":
@@ -833,19 +925,37 @@ public class App {
             to = 20;
             do {
                 cls();
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (searching) {
+                    System.out.printf("\n  Đã tìm thấy %d kết quả trong vòng 0.05s.", books.size());
+                }
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 System.out.printf("\n  | %-4s | %-60s | %-30s | %-10s |", "ID", "TÊN SÁCH", "TÁC GIẢ", "GIÁ (VNĐ)");
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
                 for (int i = from; i < to; i++) {
                     System.out.printf("\n  | %-4d | %-60s | %-30s | %-10s |", books.get(i).getID(),
-                            books.get(i).getTitle(), books.get(i).getAuthor(), formater.format(books.get(i).getPrice()));
+                            books.get(i).getTitle(), books.get(i).getAuthor(),
+                            formater.format(books.get(i).getPrice()));
                 }
-                System.out.printf("\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
-                System.out.printf("\n  Bạn chọn => 1..5: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
+                System.out.printf(
+                        "\n  +------+--------------------------------------------------------------+--------------------------------+------------+");
+                if (from == 0) {
+                    System.out.printf("\n  [1] - 2 - 3 - 4 - 5");
+                } else if (from == 20) {
+                    System.out.printf("\n  1 - [2] - 3 - 4 - 5");
+                } else if (from == 40) {
+                    System.out.printf("\n  1 - 2 - [3] - 4 - 5");
+                } else if (from == 60) {
+                    System.out.printf("\n  1 - 2 - 3 - [4] - 5");
+                } else if (from == 80) {
+                    System.out.printf("\n  1 - 2 - 3 - 4 - [5]");
+                }
+                System.out.printf(
+                        "\n  Bạn chọn => 1..5: Chuyển trang.  A: Thêm vào giỏ hàng.  B: Xem chi tiết.  0: Trở về.  => ");
                 luachon1 = sc.nextLine();
                 switch (luachon1) {
                     case "A":
-
                         int BookID1 = 0, check1 = 0;
                         do {
                             try {
@@ -916,7 +1026,7 @@ public class App {
                 }
             } while (!luachon1.equals("0"));
         } else if (size == 0) {
-            
+
         }
     }
 }

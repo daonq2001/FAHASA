@@ -1,7 +1,6 @@
 package dev.daonq.dal;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import dev.daonq.entity.Customer;
 
@@ -19,19 +18,24 @@ public class CustomerDal {
             DBHelper.closeConnection();
             return customer;
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }
 
-    private Customer getCustomer(ResultSet rs) throws SQLException {
-        Customer c = new Customer();
-        c.setAddress(rs.getString("Email"));
-        c.setAddress(rs.getString("Address"));
-        c.setID(rs.getInt("ID"));
-        c.setName(rs.getString("Name"));
-        c.setPassword(rs.getString("Password"));
-        c.setPhone(rs.getString("Phone"));
-        return c;
+    private Customer getCustomer(ResultSet rs) {
+        try {
+            Customer c = new Customer();
+            c.setAddress(rs.getString("Email"));
+            c.setAddress(rs.getString("Address"));
+            c.setID(rs.getInt("ID"));
+            c.setName(rs.getString("Name"));
+            c.setPassword(rs.getString("Password"));
+            c.setPhone(rs.getString("Phone"));
+            return c;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
-    
 }

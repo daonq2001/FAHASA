@@ -9,21 +9,13 @@ public class OrderBl {
     OrderDal dal = new OrderDal();
 
     public ArrayList<Order> getListOrderByCustomerID(int CustomerID) {
-        try {
-            ArrayList<Order> listOrders = dal.getListOrderByCustomerID(CustomerID);
-            if (listOrders != null) {
-                return listOrders;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            return null;
-        }
+        return  dal.getListOrderByCustomerID(CustomerID);
     }
 
-    public Boolean insertOrder(int CustomerID, Double thanhtien) {
-        return dal.insertOrder(CustomerID, thanhtien);
+    public Boolean insertOrder(int CustomerID) {
+        return dal.insertOrder(CustomerID);
     }
+
     public Order getOrderByCustomerID(int CustomerID) {
         return dal.getOrderByCustomerID(CustomerID);
     }

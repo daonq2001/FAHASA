@@ -10,20 +10,19 @@ import dev.daonq.entity.Order;
 public class OrderDal{
 
     
-    public Boolean insertOrder(int CustomerID, Double thanhtien) {
+    public Boolean insertOrder(int CustomerID) {
         try {
             Connection con = DBHelper.getConnection();
             DBHelper.executeQuery("SET FOREIGN_KEY_CHECKS = 0;");
-            String sql = "INSERT INTO Orders(CustomerID, TotalDue) values (?, ?);";
+            String sql = "INSERT INTO Orders(CustomerID) values (?);";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setInt(1, CustomerID);
-            preparedStatement.setDouble(2, thanhtien);
             Boolean b = preparedStatement.execute();
             DBHelper.executeQuery("SET FOREIGN_KEY_CHECKS = 1;");
             DBHelper.closeConnection();
             return b;
         } catch (Exception e) {
-            System.out.println("Đã có lỗi xảy ra trong quá trình thêm dữ liệu vào bảng Order.");
+            System.out.println(e);
             return false;
         }
     }
@@ -41,6 +40,7 @@ public class OrderDal{
             DBHelper.closeConnection();
             return order;
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }
@@ -59,6 +59,7 @@ public class OrderDal{
             DBHelper.closeConnection();
             return listOrder;
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }
@@ -69,9 +70,10 @@ public class OrderDal{
             order.setID(rs.getInt("ID"));
             order.setCustomerID(rs.getInt("CustomerID"));
             order.setDate(rs.getTimestamp("Date"));
-            order.setTotalDue(rs.getDouble("TotalDue"));
+            order.setStatus(rs.getInt("Status"));
             return order;
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }

@@ -1,113 +1,113 @@
 package dev.daonq.entity;
 
 public class Book {
-    private int ID;
-    private int NumberofPages;
-    private Double Price;
-    private String Title;
-    private String Author;
-    private String IssuingCompany;
-    private String DateofPublication;
-    private String Dimensions;
-    private String CoverType;
-    private String PublishingCompany;
-    private String SKU;
-    private String Description;
+    private int id;
+    private int numberofPages;
+    private Double price;
+    private String title;
+    private String author;
+    private String issuingCompany;
+    private String dateofPublication;
+    private String dimensions;
+    private String coverType;
+    private String publishingCompany;
+    private String sku;
+    private String description;
 
     public String getDescription() {
-        return this.Description;
+        return this.description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        this.id = id;
     }
 
     public int getNumberofPages() {
-        return this.NumberofPages;
+        return this.numberofPages;
     }
 
-    public void setNumberofPages(int NumberofPages) {
-        this.NumberofPages = NumberofPages;
+    public void setNumberofPages(int numberofPages) {
+        this.numberofPages = numberofPages;
     }
 
     public Double getPrice() {
-        return this.Price;
+        return this.price;
     }
 
-    public void setPrice(Double Price) {
-        this.Price = Price;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getTitle() {
-        return this.Title;
+        return this.title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {
-        return this.Author;
+        return this.author;
     }
 
-    public void setAuthor(String Author) {
-        this.Author = Author;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getIssuingCompany() {
-        return this.IssuingCompany;
+        return this.issuingCompany;
     }
 
-    public void setIssuingCompany(String IssuingCompany) {
-        this.IssuingCompany = IssuingCompany;
+    public void setIssuingCompany(String issuingCompany) {
+        this.issuingCompany = issuingCompany;
     }
 
     public String getDateofPublication() {
-        return this.DateofPublication;
+        return this.dateofPublication;
     }
 
-    public void setDateofPublication(String DateofPublication) {
-        this.DateofPublication = DateofPublication;
+    public void setDateofPublication(String dateofPublication) {
+        this.dateofPublication = dateofPublication;
     }
 
     public String getDimensions() {
-        return this.Dimensions;
+        return this.dimensions;
     }
 
-    public void setDimensions(String Dimensions) {
-        this.Dimensions = Dimensions;
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
     }
 
     public String getCoverType() {
-        return this.CoverType;
+        return this.coverType;
     }
 
-    public void setCoverType(String CoverType) {
-        this.CoverType = CoverType;
+    public void setCoverType(String coverType) {
+        this.coverType = coverType;
     }
 
     public String getPublishingCompany() {
-        return this.PublishingCompany;
+        return this.publishingCompany;
     }
 
-    public void setPublishingCompany(String PublishingCompany) {
-        this.PublishingCompany = PublishingCompany;
+    public void setPublishingCompany(String publishingCompany) {
+        this.publishingCompany = publishingCompany;
     }
 
     public String getSKU() {
-        return this.SKU;
+        return this.sku;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setSKU(String sku) {
+        this.sku = sku;
     }
 
 }

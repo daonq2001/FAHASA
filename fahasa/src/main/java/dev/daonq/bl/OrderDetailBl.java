@@ -9,16 +9,7 @@ public class OrderDetailBl {
     OrderDetailDal dal = new OrderDetailDal();
 
     public ArrayList<OrderDetail> getListOrderDetailByOrderID(int OrderID) {
-        try {
-            ArrayList<OrderDetail> listOrderDetails = dal.getListOrderDetailByOrderID(OrderID);
-            if (listOrderDetails != null) {
-                return listOrderDetails;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            return null;
-        }
+        return dal.getListOrderDetailByOrderID(OrderID);
     }
 
     public Boolean insertOrderDetail(OrderDetail orderDetail) {
