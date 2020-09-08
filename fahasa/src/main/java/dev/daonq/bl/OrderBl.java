@@ -19,4 +19,8 @@ public class OrderBl {
     public Order getOrderByCustomerID(int CustomerID) {
         return dal.getOrderByCustomerID(CustomerID);
     }
+
+    public Boolean updateStatus(int stt, int id){
+        return dal.updateStt(stt, id);
+    }
 }

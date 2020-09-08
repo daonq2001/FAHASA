@@ -9,6 +9,23 @@ import dev.daonq.entity.Order;
 
 public class OrderDal{
 
+    public Boolean updateStt(int stt, int id){
+        try {
+            Connection con = DBHelper.getConnection();
+            DBHelper.executeQuery("SET FOREIGN_KEY_CHECKS = 0");
+            String sql = "UPDATE Orders SET Status = ? WHERE ID = ?;";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, stt);
+            preparedStatement.setInt(2, id);
+            Boolean b = preparedStatement.execute();
+            DBHelper.executeQuery("SET FOREIGN_KEY_CHECKS = 1;");
+            DBHelper.closeConnection();
+            return b;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
     
     public Boolean insertOrder(int CustomerID) {
         try {
