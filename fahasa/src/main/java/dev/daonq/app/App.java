@@ -202,7 +202,7 @@ public class App {
         System.out.printf(
                 "\n  +------------------+----------------------------------------------------------------------------------------------+");
         System.out.printf(
-                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI YOUTUBER                                                            |");
+                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI TIKI                                                            |");
         System.out.printf(
                 "\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
         System.out.printf(
@@ -343,7 +343,7 @@ public class App {
         System.out.printf(
                 "\n  +------------------+----------------------------------------------------------------------------------------------+");
         System.out.printf(
-                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI YOUTUBER                                                            |");
+                "\n  | Đơn vị bán hàng  : CÔNG TY TNHH MTV THƯƠNG MẠI TIKI                                                            |");
         System.out.printf(
                 "\n  | Mã số thuế       : 0 3 1 2 3 8 8 3 6 3                                                                          |");
         System.out.printf(
