@@ -233,37 +233,43 @@ public class App {
         Double totalDue = 0.0;
         for (int i = 0; i < orderDetails.size(); i++) {
             book = bookBL.getBookByID(orderDetails.get(i).getBookID());
-            Double tamtinh = book.getPrice() * listOrderDetails.get(i).getAmount();
+            Double tamtinh = book.getPrice() * orderDetails.get(i).getAmount();
             if(tamtinh > 999999){
                 if(book.getPrice() > 99999){
                     System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d | %-15s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 } else if(book.getPrice() < 100000){
                     System.out.printf("\n  | %-4d | %-60s |  %-9s | %-10d | %-15s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 }
             } else if(tamtinh > 99999 && tamtinh < 1000000){
                 if(book.getPrice() > 99999){
                     System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d |   %-13s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 } else if(book.getPrice() < 100000){
                     System.out.printf("\n  | %-4d | %-60s |  %-9s | %-10d |   %-13s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 }
             } else if(tamtinh < 100000){
                 if(book.getPrice() > 99999){
                     System.out.printf("\n  | %-4d | %-60s | %-10s | %-10d |    %-12s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 } else if(book.getPrice() < 100000){
                     System.out.printf("\n  | %-4d | %-60s |  %-9s | %-10d |    %-12s |", book.getID(), book.getTitle(),
-                    formater.format(book.getPrice()), listOrderDetails.get(i).getAmount(), formater.format(tamtinh));
+                    formater.format(book.getPrice()), orderDetails.get(i).getAmount(), formater.format(tamtinh));
                 }
             }
             totalDue += tamtinh;
         }
         System.out.printf(
-                "\n  |                                                                                      TỔNG CỘNG: %-15s |",
-                formater.format(totalDue));
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
+                if(totalDue < 100000){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG:    %-12s |", formater.format(totalDue));
+                } else if(totalDue > 99999 && totalDue < 1000000){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG:   %-13s |", formater.format(totalDue));
+                } else if(totalDue > 999999){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG: %-15s |", formater.format(totalDue));
+                }
         System.out.printf(
                 "\n  +-----------------------------------------------------------------------------------------------------------------+");
         System.out.printf("\n  Nhấn phím bất kì để tiếp tục...");
@@ -372,7 +378,6 @@ public class App {
                         for (int i = 0; i < listOrders.size(); i++) {
                             if (listOrders.get(i).getID() == idDonHang1) {
                                 a1 = 1;
-                                orderDetails.clear();
                                 orderDetails = orderDetailBL.getListOrderDetailByOrderID(listOrders.get(i).getID());
                                 InDonHang(orderDetails, listOrders.get(i));
                             }
@@ -448,13 +453,13 @@ public class App {
         System.out.printf("\n  | Địa chỉ          : %-92s |", customer.getAddress());
         System.out.printf("\n  | Điện thoại       : %-92s |", customer.getPhone());
         System.out.printf(
-                "\n  +------------------+---------------------------------------------------------------------------------------------+");
+                "\n  +------------------+----------------------------------------------------------------------------------------------+");
         System.out.printf(
-                "\n  +----------------------------------------------------------------------------------------------------------------+");
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
         System.out.printf("\n  | %-4s | %-60s | %-10s | %-10s | %-15s |", "STT", "Sản phẩm", "Giá", "Số lượng",
                 "Thành tiền");
         System.out.printf(
-                "\n  +----------------------------------------------------------------------------------------------------------------+");
+                "\n  +-----------------------------------------------------------------------------------------------------------------+");
         Book book = new Book();
         BookBl bookBL = new BookBl();
         Double totalDue = 0.0;
@@ -487,9 +492,17 @@ public class App {
                 }
             }
             totalDue += tamtinh;
-            System.out.printf("\n  |-----------------------------------------------------------------------------------------------------------------|");
         }
-        System.out.printf("\n  |                                                                                      TỔNG CỘNG: %-15s |", formater.format(totalDue));
+        System.out.printf("\n  |-----------------------------------------------------------------------------------------------------------------|");
+
+        if(totalDue < 100000){
+            System.out.printf("\n  |                                                                                      TỔNG CỘNG:    %-12s |", formater.format(totalDue));
+        } else if(totalDue > 99999 && totalDue < 1000000){
+            System.out.printf("\n  |                                                                                      TỔNG CỘNG:   %-13s |", formater.format(totalDue));
+        } else if(totalDue > 999999){
+            System.out.printf("\n  |                                                                                      TỔNG CỘNG: %-15s |", formater.format(totalDue));
+        }
+        
         System.out.printf("\n  +-----------------------------------------------------------------------------------------------------------------+");
         listOrderDetails.clear();
         System.out.printf("\n  Nhấn phím bất kì để quay trở lại.");
@@ -560,9 +573,13 @@ public class App {
         }
         System.out.printf(
                 "\n  +-----------------------------------------------------------------------------------------------------------------+");
-        System.out.printf(
-                "\n  |                                                                                      TỔNG CỘNG: %-15s |",
-                formater.format(thanhtien));
+                if(thanhtien < 100000){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG:    %-12s |", formater.format(thanhtien));
+                } else if(thanhtien > 99999 && thanhtien < 1000000){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG:   %-13s |", formater.format(thanhtien));
+                } else if(thanhtien > 999999){
+                    System.out.printf("\n  |                                                                                      TỔNG CỘNG: %-15s |", formater.format(thanhtien));
+                }
         System.out.printf(
                 "\n  +-----------------------------------------------------------------------------------------------------------------+");
         System.out.printf("\n  [1]-Chỉnh sửa giỏ hàng - [2]-Đặt hàng - [0]-Trở về");
